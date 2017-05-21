@@ -1,5 +1,7 @@
 # Using Filters in Vue.js v2
 
+![filters.app](./images/filters-app.png)
+
 ## Introduction
 
 This application is a basic implementation of filters in Vue.js v2. The app is based on the tutorial found [here](https://coligo.io/vuejs-filters).
