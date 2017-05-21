@@ -33,18 +33,35 @@ export default {
   name: 'app',
   computed: {
     filtered() {
+      /* 
+        Here I am storing filterSelection, orderBySelection and products locally.
+        I found that calling orderBySelection without assigning it to a local variable
+        returned an object that turned out to be the entire <select> element.
+        I'm not sure why or how it did that.
+      */
       var filterSelection = this.filterSelection;
       var orderBySelection = this.orderBySelection;
       var filteredProducts = this.products;
 
+      /* 
+          Here we only filter the products if the user has selected 
+          something other than 'all' in the filter <select> element.       
+      */
       if (filterSelection != 'all') {
         filteredProducts = filteredProducts.filter((product) => {
           return product.category === filterSelection;
         });
       }
 
+      /*
+        If the user selects ordering from Lowest to Highest Price,
+        sort accordingly.
+      */
       if (orderBySelection === 'lowToHigh') {
           return filteredProducts.sort((productA, productB) => {
+            /*
+              Extracting the price from the product object
+            */
             var priceA = parseFloat(productA.price);
             var priceB = parseFloat(productB.price);
             if (priceA > priceB) {
@@ -54,6 +71,9 @@ export default {
             }
             return 0;
           });
+      /*
+        Same here for ordering from Highest to Lowest Price.
+      */
       } else if (orderBySelection === 'highToLow') {
         return filteredProducts.sort((productA, productB) => {
           var priceA = parseFloat(productA.price);
@@ -65,11 +85,14 @@ export default {
           }
           return 0;
         });
+      /*
+        The default sort option is by name alphabetically.
+      */
       } else {
         return filteredProducts.sort((productA, productB) => {
           var nameA = productA.name.toLowerCase();
           var nameB = productB.name.toLowerCase();
-          
+
           if (nameA > nameB) {
             return 1;
           } else if (nameA < nameB) {
@@ -78,6 +101,7 @@ export default {
           return 0;
         });
       }
+      
       return filteredProducts;
     }
   },
