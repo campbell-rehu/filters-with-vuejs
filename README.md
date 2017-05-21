@@ -12,3 +12,4 @@ This application is a basic implementation of filters in Vue.js v2. The app is b
 4. In the Computed properties object, I added a `filtered()` function which initially returned the filtered products based on the user selection from a `<select></select>` element. 
 5. From this, I added the orderBy `<select></select>` element and implemented the logic in the `filtered()` function.
 6. Since the `products` array is an array of objects, I had to implement my own sorting function to extract the names and prices for the products and sort accordingly. This was surprisingly straightforward.
+7. I am quite pleased that I am not mutating the actual data in any of the filters or computed functions.
